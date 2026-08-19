@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CobaltPassport.com — Traceability, provenance and lifecycle data for cobalt</title>
+  <meta name="description" content="CobaltPassport.com: a platform focused on cobalt traceability, provenance, responsible sourcing, recycled content, carbon data and digital product passports.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cobaltpassport.com/">
+
+  <!-- Google Analytics: add the specific GA4 Measurement ID for cobaltpassport.com here -->
+
+  <style>
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --text:#172033;
+      --muted:#667085;
+      --primary:#3d5a80;
+      --primary-dark:#2f4664;
+      --border:#e5e9ef;
+      --soft:#eef3f8;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+                  "Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top right,rgba(61,90,128,.10),transparent 30rem),
+        linear-gradient(180deg,#fafbfd 0%,var(--bg) 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .container{width:min(1120px,calc(100% - 40px));margin:0 auto}
+
+    header{
+      padding:22px 0;
+      border-bottom:1px solid rgba(229,233,239,.9);
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(10px);
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+
+    .brand{
+      font-weight:800;
+      font-size:1.22rem;
+      letter-spacing:-.035em;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .brand span{color:var(--primary)}
+    .nav-actions{display:flex;align-items:center;gap:18px}
+
+    .nav-link{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:.95rem;
+      font-weight:600;
+    }
+
+    .language-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:4px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:10px;
+    }
+
+    .language-switch button{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      font:inherit;
+      font-size:.82rem;
+      font-weight:800;
+      padding:6px 9px;
+      border-radius:7px;
+      cursor:pointer;
+    }
+
+    .language-switch button.active{background:var(--text);color:#fff}
+
+    .hero{
+      min-height:72vh;
+      display:flex;
+      align-items:center;
+      padding:80px 0 70px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border:1px solid #d9e0e9;
+      background:var(--soft);
+      color:var(--primary);
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:22px;
+    }
+
+    h1{
+      font-size:clamp(3rem,7vw,5.8rem);
+      line-height:.98;
+      letter-spacing:-.065em;
+      max-width:900px;
+    }
+
+    .hero p{
+      margin-top:26px;
+      font-size:1.18rem;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius:12px;
+      padding:13px 20px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(61,90,128,.18);
+    }
+
+    .btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+
+    .btn-secondary:hover{border-color:#cbd2dc;transform:translateY(-1px)}
+
+    .preview{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0 24px 70px rgba(31,46,78,.08);
+    }
+
+    .preview-top{display:flex;gap:7px;margin-bottom:24px}
+    .dot{width:9px;height:9px;border-radius:50%;background:#d9dee7}
+
+    .mini-card{
+      padding:18px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      margin-top:12px;
+      background:#fbfcfe;
+    }
+
+    .mini-card strong{display:block;margin-bottom:4px}
+    .mini-card span{color:var(--muted);font-size:.92rem}
+
+    .section{padding:80px 0}
+
+    .section-title{
+      text-align:center;
+      max-width:800px;
+      margin:0 auto 42px;
+    }
+
+    .section-title h2{
+      font-size:clamp(2rem,4vw,3.2rem);
+      letter-spacing:-.045em;
+      line-height:1.05;
+    }
+
+    .section-title p{color:var(--muted);margin-top:14px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:26px;
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:var(--soft);
+      display:grid;
+      place-items:center;
+      color:var(--primary);
+      font-weight:800;
+      margin-bottom:18px;
+    }
+
+    .card h3{font-size:1.1rem;margin-bottom:7px}
+    .card p{color:var(--muted);font-size:.95rem}
+
+    .cta{
+      margin:50px auto 80px;
+      background:var(--text);
+      color:#fff;
+      border-radius:24px;
+      padding:48px;
+      text-align:center;
+    }
+
+    .cta h2{
+      font-size:clamp(2rem,4vw,3rem);
+      letter-spacing:-.045em;
+    }
+
+    .cta p{color:#cbd2dc;margin-top:10px}
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:28px 0 40px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .footer-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    @media(max-width:800px){
+      .hero{min-height:auto;padding-top:60px}
+      .hero-grid{grid-template-columns:1fr;gap:38px}
+      .cards{grid-template-columns:1fr}
+      .preview{max-width:560px}
+      .nav-link{display:none}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="brand">Cobalt<span>Passport</span></a>
+
+      <div class="nav-actions">
+        <a href="#about" class="nav-link" data-i18n="navAbout">About the project</a>
+
+        <div class="language-switch" aria-label="Language selector">
+          <button type="button" id="lang-en" class="active" onclick="setLanguage('en')">EN</button>
+          <button type="button" id="lang-es" onclick="setLanguage('es')">ES</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="eyebrow">✦ Cobalt · Traceability · Responsible sourcing</div>
+
+      <h1 data-i18n="heroTitle">A digital passport for cobalt.</h1>
+
+      <p data-i18n="heroText">
+        CobaltPassport.com is designed as a platform for connecting material identity,
+        origin, chain-of-custody, processing, recycled content and environmental data
+        across the cobalt value chain.
+      </p>
+
+      <div class="actions">
+        <a href="#about" class="btn btn-primary" data-i18n="discover">Discover the project</a>
+        <a href="#coming" class="btn btn-secondary" data-i18n="comingSoon">Coming soon</a>
+      </div>
+    </div>
+
+    <div class="preview" aria-label="Cobalt Passport">
+      <div class="preview-top">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="provenance">🔗 Provenance</strong>
+        <span data-i18n="provenanceText">Track origin, suppliers, processing stages and chain-of-custody information.</span>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="sourcing">🛡 Responsible sourcing</strong>
+        <span data-i18n="sourcingText">Organize sourcing, due-diligence and supporting documentation around each material flow.</span>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="circularity">♻️ Circularity</strong>
+        <span data-i18n="circularityText">Connect recycled content, recovery, recycling and secondary material information.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="sectionTitle">From origin to end product.</h2>
+
+      <p data-i18n="sectionText">
+        A digital passport concept for improving transparency, traceability and
+        lifecycle visibility across cobalt supply chains.
+      </p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">01</div>
+        <h3 data-i18n="identity">Material identity</h3>
+        <p data-i18n="identityText">Reference batches, grades, suppliers, processing steps and downstream products.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">02</div>
+        <h3 data-i18n="evidence">Data & evidence</h3>
+        <p data-i18n="evidenceText">Connect provenance, due-diligence, carbon information and supporting documentation.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">03</div>
+        <h3 data-i18n="lifecycle">Lifecycle traceability</h3>
+        <p data-i18n="lifecycleText">Follow cobalt from extraction and refining to manufacturing, use, recovery and recycling.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="coming">
+  <div class="cta">
+    <h2 data-i18n="ctaTitle">We are building CobaltPassport.com</h2>
+    <p data-i18n="ctaText">Traceability models, responsible-sourcing concepts and digital passport resources for cobalt will be available soon.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <strong>CobaltPassport.com</strong>
+    <span>© 2026 CobaltPassport.com</span>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en:{
+    pageTitle:"CobaltPassport.com — Traceability, provenance and lifecycle data for cobalt",
+    description:"CobaltPassport.com: a platform focused on cobalt traceability, provenance, responsible sourcing, recycled content, carbon data and digital product passports.",
+    navAbout:"About the project",
+    eyebrow:"✦ Cobalt · Traceability · Responsible sourcing",
+    heroTitle:"A digital passport for cobalt.",
+    heroText:"CobaltPassport.com is designed as a platform for connecting material identity, origin, chain-of-custody, processing, recycled content and environmental data across the cobalt value chain.",
+    discover:"Discover the project",
+    comingSoon:"Coming soon",
+    provenance:"🔗 Provenance",
+    provenanceText:"Track origin, suppliers, processing stages and chain-of-custody information.",
+    sourcing:"🛡 Responsible sourcing",
+    sourcingText:"Organize sourcing, due-diligence and supporting documentation around each material flow.",
+    circularity:"♻️ Circularity",
+    circularityText:"Connect recycled content, recovery, recycling and secondary material information.",
+    sectionTitle:"From origin to end product.",
+    sectionText:"A digital passport concept for improving transparency, traceability and lifecycle visibility across cobalt supply chains.",
+    identity:"Material identity",
+    identityText:"Reference batches, grades, suppliers, processing steps and downstream products.",
+    evidence:"Data & evidence",
+    evidenceText:"Connect provenance, due-diligence, carbon information and supporting documentation.",
+    lifecycle:"Lifecycle traceability",
+    lifecycleText:"Follow cobalt from extraction and refining to manufacturing, use, recovery and recycling.",
+    ctaTitle:"We are building CobaltPassport.com",
+    ctaText:"Traceability models, responsible-sourcing concepts and digital passport resources for cobalt will be available soon."
+  },
+
+  es:{
+    pageTitle:"CobaltPassport.com — Trazabilidad, procedencia y ciclo de vida del cobalto",
+    description:"CobaltPassport.com: plataforma centrada en trazabilidad del cobalto, procedencia, abastecimiento responsable, contenido reciclado, datos de carbono y pasaportes digitales.",
+    navAbout:"Sobre el proyecto",
+    eyebrow:"✦ Cobalto · Trazabilidad · Abastecimiento responsable",
+    heroTitle:"Un pasaporte digital para el cobalto.",
+    heroText:"CobaltPassport.com nace como una plataforma para conectar identidad del material, origen, cadena de custodia, procesado, contenido reciclado y datos ambientales a lo largo de la cadena de valor del cobalto.",
+    discover:"Descubrir el proyecto",
+    comingSoon:"Próximamente",
+    provenance:"🔗 Procedencia",
+    provenanceText:"Traza origen, proveedores, etapas de procesado e información de cadena de custodia.",
+    sourcing:"🛡 Abastecimiento responsable",
+    sourcingText:"Organiza información de abastecimiento, due diligence y documentación asociada a cada flujo de material.",
+    circularity:"♻️ Circularidad",
+    circularityText:"Conecta contenido reciclado, recuperación, reciclaje e información sobre material secundario.",
+    sectionTitle:"Desde el origen hasta el producto final.",
+    sectionText:"Un concepto de pasaporte digital para mejorar transparencia, trazabilidad y visibilidad del ciclo de vida en las cadenas de suministro de cobalto.",
+    identity:"Identidad del material",
+    identityText:"Referencia lotes, calidades, proveedores, etapas de procesado y productos posteriores.",
+    evidence:"Datos y evidencias",
+    evidenceText:"Conecta procedencia, due diligence, información de carbono y documentación asociada.",
+    lifecycle:"Trazabilidad del ciclo de vida",
+    lifecycleText:"Sigue el cobalto desde extracción y refinado hasta fabricación, uso, recuperación y reciclaje.",
+    ctaTitle:"Estamos preparando CobaltPassport.com",
+    ctaText:"Próximamente encontrarás modelos de trazabilidad, conceptos de abastecimiento responsable y recursos de pasaporte digital para cobalto."
+  }
+};
+
+function setLanguage(lang){
+  const t = translations[lang] || translations.en;
+
+  document.documentElement.lang = lang;
+  document.title = t.pageTitle;
+
+  const meta = document.querySelector('meta[name="description"]');
+  if(meta) meta.setAttribute("content", t.description);
+
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(t[key]) el.textContent = t[key];
+  });
+
+  document.getElementById("lang-en").classList.toggle("active", lang==="en");
+  document.getElementById("lang-es").classList.toggle("active", lang==="es");
+
+  localStorage.setItem("cobaltpassport-language", lang);
+}
+
+const savedLanguage = localStorage.getItem("cobaltpassport-language");
+const browserLanguage = (navigator.language || "").toLowerCase();
+
+let initialLanguage = "en";
+if(browserLanguage.startsWith("es")) initialLanguage = "es";
+
+setLanguage(savedLanguage || initialLanguage);
+</script>
+</body>
+</html>
